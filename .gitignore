@@ -1,0 +1,12 @@
+.idea/
+.vscode/
+
+vendor/
+
+conf/config.json
+conf/siteconfig.json
+
+var/tmp/*
+!var/tmp/.gitkeep
+var/archives/*
+!var/archives/.gitkeep
