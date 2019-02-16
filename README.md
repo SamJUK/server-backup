@@ -13,4 +13,8 @@
 # Todo
  - Check Box storage left, if available storage below limit email admins
  - Database Dumps
-
+ - On exceptions email admin
+ - Abstract storage code to allow for other services
+   - Google Drive
+   - Box
+   - Dropbox
