@@ -12,6 +12,8 @@ class App {
     public const ARCHIVE_STORAGE_LOCATION = __DIR__.'/var/archives';
     public const CONFIG_SITE_LOCATION = __DIR__.'/conf/siteconfig.json';
 
+    public const SITE_NAME_FROM_ARCHIVE_REGEX = '/([\w\.\-]*?)[\.\d\_\-]*.tar/';
+
     public static function archive_sites(): void
     {
         self::log('Archiving Sites', self::LOG_DEBUG);
@@ -29,13 +31,9 @@ class App {
         $startTime = microtime(true);
         $archiveName = self::get_archive_name($site_name, self::ARCHIVE_TMP_LOCATION);
         self::log("Building Archive: $archiveName");
-
-        $phar = new PharData($archiveName);
-        foreach ($site->files as $directory) {
-            $phar->buildFromDirectory($directory);
-        }
-        unset($phar);
-
+        $files = implode(' ', $site->files);
+        // @TODO: Find a better way to handle this. PharData fails on long file names
+        shell_exec("tar -cf $archiveName $files");
         $endTime = microtime(true);
         $totalTime = $endTime - $startTime;
         self::log("Archive Built: $archiveName :: ${totalTime}s", self::LOG_DEBUG);
@@ -49,9 +47,9 @@ class App {
 
     public static function get_archive_name(string $site_name, string $folder): string
     {
-        $date = date('dmY');
+        $date = date('d-m-Y_H-i-s');
         $suffix = 1;
-        $archiveNameTemplate = "$folder/$site_name.$date.tar";
+        $archiveNameTemplate = "$folder/${site_name}_$date.tar";
         $archiveName = $archiveNameTemplate;
 
         while(file_exists($archiveName) || file_exists($archiveName.'.gz')) {
@@ -91,11 +89,11 @@ class App {
 
     public static function get_site_from_archive_name(string $archiveName) : string
     {
+        $archiveName = basename($archiveName);
         $matches = array();
-        preg_match('/^(?:.+\/)*([\w\.]*?)\.\d{8}/', $archiveName, $matches);
+        preg_match(self::SITE_NAME_FROM_ARCHIVE_REGEX, $archiveName, $matches);
         return $matches[1] ?? '';
     }
-
 
     public static function move_archive_to_longterm_local_storage(string $file): void
     {

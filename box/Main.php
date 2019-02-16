@@ -2,6 +2,7 @@
 require_once __DIR__.'/../vendor/autoload.php';
 require_once __DIR__.'/../App.php';
 require_once __DIR__.'/Authentication.php';
+require_once __DIR__.'/Exceptions.php';
 
 use Authentication as BoxAuth;
 
