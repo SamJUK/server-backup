@@ -13,8 +13,13 @@
 # Todo
  - Check Box storage left, if available storage below limit email admins
  - Database Dumps
+ - Include exclusion of files. cache or media files etc
  - On exceptions email admin
  - Abstract storage code to allow for other services
    - Google Drive
    - Box
    - Dropbox
+ - Introduce backup schedules
+   - Set frequency for sites to update
+   - Blacklist days/times; eg(Update every 3rd hour except 12 or dont update on sundays)
+ 
