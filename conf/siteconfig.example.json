@@ -1,6 +1,9 @@
 {
   "example" : {
-    "files": ["/var/www/site.com"],
+    "files": {
+      "include": ["/var/www/site.com"],
+      "exclude": ["/var/www/site.com/var/cache"]
+    },
     "databases": [
       {
         "databasename": "test_db",

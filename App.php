@@ -31,9 +31,11 @@ class App {
         $startTime = microtime(true);
         $archiveName = self::get_archive_name($site_name, self::ARCHIVE_TMP_LOCATION);
         self::log("Building Archive: $archiveName");
-        $files = implode(' ', $site->files);
+        // @TODO add logic here to catch config errors
+        $files = implode(' ', $site->files->include);
+        $excludefiles = '--exclude="'.implode('" --exclude="', $site->files->exclude).'"';
         // @TODO: Find a better way to handle this. PharData fails on long file names
-        shell_exec("tar -cf $archiveName $files");
+        shell_exec("tar -cf $archiveName $files $excludefiles");
         $endTime = microtime(true);
         $totalTime = $endTime - $startTime;
         self::log("Archive Built: $archiveName :: ${totalTime}s", self::LOG_DEBUG);
