@@ -5,6 +5,7 @@ vendor/
 
 conf/providers/*/config.json
 conf/siteconfig.json
+conf/app.json
 
 var/tmp/*
 !var/tmp/.gitkeep
