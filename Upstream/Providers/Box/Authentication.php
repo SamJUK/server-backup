@@ -12,7 +12,7 @@ class Authentication implements AuthenticationInterface
 {
     private const BOX_API_ERROR_UNAUTHORISED = 401;
 
-    private const CONFIG_PATH = APP_ROOT . '/conf/config.json';
+    private const CONFIG_PATH = APP_ROOT . '/conf/providers/box/config.json';
     private const AUTHENTICATION_URL = 'https://api.box.com/oauth2/token';
 
     private $_guzzleClient;

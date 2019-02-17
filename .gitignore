@@ -3,7 +3,7 @@
 
 vendor/
 
-conf/config.json
+conf/providers/*/config.json
 conf/siteconfig.json
 
 var/tmp/*
