@@ -1,7 +1,5 @@
 <?php
-require_once 'box/Main.php';
-
-use Main as Box;
+use Upstream\Providers\Box;
 
 class App {
 

@@ -17,5 +17,5 @@ interface AuthenticationInterface
     /**
      * Fetch a new access token
      */
-    public function fetchNewAccessToken() : void;
+    public function fetchNewAccessToken() : string;
 }

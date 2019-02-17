@@ -5,8 +5,8 @@ namespace Upstream;
 abstract class UpstreamBase
     implements UpstreamInterface
 {
-    abstract public function uploadFile() : bool;
-    abstract public function createFolder() : bool;
+    abstract public function uploadFile(string $file) : bool;
+    abstract public function createFolder(string $name) : bool;
     abstract public function getStorageQuota() : int;
     abstract public function getStorageUsage() : int;
 

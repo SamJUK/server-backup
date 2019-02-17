@@ -2,6 +2,8 @@
 require_once 'vendor/autoload.php';
 require_once 'App.php';
 
+define('APP_ROOT', __DIR__);
+
 $startTime = microtime(true);
 App::archive_sites();
 App::upload_archives();

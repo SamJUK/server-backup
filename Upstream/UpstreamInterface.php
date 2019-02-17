@@ -7,12 +7,12 @@ interface UpstreamInterface
     /**
      * Upload a file to the server
      */
-    public function uploadFile() : bool;
+    public function uploadFile(string $file) : bool;
 
     /**
      * Create a folder on the server
      */
-    public function createFolder() : bool;
+    public function createFolder(string $name) : bool;
 
     /**
      * Check if there is room on the server

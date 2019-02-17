@@ -2,5 +2,8 @@
     "require": {
         "firebase/php-jwt": "^5.0",
         "guzzlehttp/guzzle": "^6.3"
+    },
+    "autoload": {
+        "classmap": ["Upstream/"]
     }
 }
