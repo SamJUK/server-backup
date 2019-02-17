@@ -3,11 +3,13 @@
 ## Application
 ### General Config
 Contains General application config settings like stop on exceptions, is debug mode etc
+
 Location: ./conf/app.json
   
 
 ### Site Backup Config
-Contains what folders/mysqldumps backs up to what folders    
+Contains what folders/mysqldumps backs up to what folders
+    
 Location: ./conf/siteconfig.json
   
   
