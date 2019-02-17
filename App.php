@@ -32,8 +32,15 @@ class App {
         $archiveName = self::get_archive_name($site_name, self::ARCHIVE_TMP_LOCATION);
         self::log("Building Archive: $archiveName");
         // @TODO add logic here to catch config errors
+        if(!isset($site->files->include)) {
+            throw new \RuntimeException('No files to include?');
+        }
         $files = implode(' ', $site->files->include);
-        $excludefiles = '--exclude="'.implode('" --exclude="', $site->files->exclude).'"';
+        if(!isset($site->files->exclude) || !is_array($site->files->exclude) || count($site->files->exclude) <= 0) {
+            $excludefiles = '';
+        } else {
+            $excludefiles = '--exclude="'.implode('" --exclude="', $site->files->exclude).'"';
+        }
         // @TODO: Find a better way to handle this. PharData fails on long file names
         shell_exec("tar -cf $archiveName $files $excludefiles");
         $endTime = microtime(true);
