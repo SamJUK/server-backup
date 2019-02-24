@@ -18,4 +18,8 @@ interface AuthenticationInterface
      * Fetch a new access token
      */
     public function fetchNewAccessToken() : string;
+
+
+
+    public function getConfig() : \stdClass;
 }
