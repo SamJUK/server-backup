@@ -3,55 +3,29 @@
 namespace Upstream\Providers\Box;
 
 use Upstream\AuthenticationInterface;
+use Upstream\AuthenticationBase;
 use GuzzleHttp\Client as GuzzleClient;
 use GuzzleHttp\Exception\ClientException as GuzzleException;
 use \Firebase\JWT\JWT;
 use Upstream\Providers\Box;
 
-class Authentication implements AuthenticationInterface
+class Authentication extends AuthenticationBase implements AuthenticationInterface
 {
     private const BOX_API_ERROR_UNAUTHORISED = 401;
 
-    private const CONFIG_PATH = APP_ROOT . '/conf/providers/box/config.json';
     private const AUTHENTICATION_URL = 'https://api.box.com/oauth2/token';
 
-    private $_guzzleClient;
-
-    private $_config;
-    private $_accesstoken;
+    protected $_accesstoken;
 
     public function __construct()
     {
-        $this->_guzzleClient = new GuzzleClient();
-        $this->getConfig();
+        parent::__construct();
         $this->fetchNewAccessToken();
     }
 
-    /**
-     * @throws \RuntimeException
-     */
-    private function getConfig() : \stdClass
+    protected function setConfigPath() : void
     {
-        if($this->_config instanceof \stdClass) {
-            return $this->_config;
-        }
-
-        if(!file_exists(self::CONFIG_PATH)) {
-            throw new \RuntimeException('Cannot find config file');
-        }
-
-        $contents = file_get_contents(self::CONFIG_PATH);
-        if(!\is_string($contents)) {
-            throw new \RuntimeException('Config Contents is invalid');
-        }
-
-        $this->_config = json_decode($contents);
-
-        if($this->_config === null) {
-            throw new \RuntimeException('Error converting Upstream Provider, Box Authentication Config to Json');
-        }
-
-        return $this->_config;
+        $this->_config_path = APP_ROOT . '/conf/providers/box/config.json';
     }
 
     /**
