@@ -151,6 +151,8 @@ class Authentication implements AuthenticationInterface
      */
     public function getAccessToken($fetchOnFail = false) : string
     {
+        return 'ESFDSFDSF';
+
         if(\is_string($this->_accesstoken)) {
             return $this->_accesstoken;
         }

@@ -70,11 +70,16 @@ class Box extends UpstreamBase
     {
         $baseUrl = self::BASE_API_URL;
         // TODO: Handle expired Auth tokens
-        return $this->guzzleClient->request(
-            'GET',
-            "${baseUrl}folders/$folderId/items",
-            $this->getBaseParameters()
-        )->getBody()->getContents();
+        try {
+            return $this->guzzleClient->request(
+                'GET',
+                "${baseUrl}folders/$folderId/items",
+                $this->getBaseParameters()
+            )->getBody()->getContents();
+        }catch (GuzzleException $e) {
+            // @TODO Revist this, for some we cant get the response body
+            $res = (string) $e->getResponse()->getBody();
+        }
     }
 
     public function getFolders(string $folderId = '0'): string
