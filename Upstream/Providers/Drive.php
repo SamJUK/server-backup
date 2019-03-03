@@ -12,4 +12,13 @@ use GuzzleHttp\Exception\ClientException as GuzzleException;
 class Drive extends UpstreamBase
 {
 
+    protected $guzzleClient;
+    protected $authentication;
+
+    public function __construct()
+    {
+        $this->guzzleClient = new GuzzleClient();
+        $this->authentication = new \stdClass();
+    }
+
 }
