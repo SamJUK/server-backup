@@ -5,9 +5,10 @@ namespace Upstream\Providers\Drive;
 use Upstream\AuthenticationBase;
 use GuzzleHttp\Client as GuzzleClient;
 use GuzzleHttp\Exception\ClientException as GuzzleException;
+use Upstream\AuthenticationInterface;
 
 
-class Authentication extends AuthenticationBase
+class Authentication extends AuthenticationBase implements AuthenticationInterface
 {
 
     public function __construct()
